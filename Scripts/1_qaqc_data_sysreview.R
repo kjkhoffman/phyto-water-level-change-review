@@ -1,10 +1,15 @@
 qaqc_data_sysreview <- function(data_path){
+
+       # QAQC extracted review data and return:
+       # - cleaned and de-duplicated data used in downstream analyses
+       # - excluded records
+       # - duplicate and de-duplication audit tables
   
-  library(dplyr)
-  library(tidyr)
-  library(janitor)
-  library(readr)
-  library(here)
+library(dplyr)
+library(tidyr)
+library(janitor)
+library(readr)
+library(here)
   
   #Read in data
   data <- data_path
@@ -14,7 +19,7 @@ qaqc_data_sysreview <- function(data_path){
   
   # QAQC
   # Excluded papers
-  #Li 2024 flow speeds are too fast, is a river
+  # Li 2024 flow speeds are too fast, is a river
   
   data_excl <- init_data |> 
     filter(!name_yr %in% c("Beaver 2013","Jia 2022","Cao 2016","Wang 2022","Kisand 2004", "Hart 2004", "Nõges 2010", "Tuvikene 2011", "Christensen 2015", "Braga 2015", "Braga 2020", "Lacerda 2018", "Abirhire 2019", "Sakharova 2018", "Noges 1999", "Li 2024")) |>
@@ -24,9 +29,6 @@ qaqc_data_sysreview <- function(data_path){
     filter(!notes %in% c("Ignore this version, everything has been added to multiple reservoirs sheet! KKH"))
   
   excluded_papers <- anti_join(init_data, data_excl)
-  
-  duplicate_waterbodies <- data_excl |> 
-    select(name_yr, res_name, country, study_years, consecutive, phys_response, notes)
   
   # Fixing typos and assigning trophic levels
   
@@ -82,14 +84,57 @@ qaqc_data_sysreview <- function(data_path){
                                            ifelse(trophic_status_combined %in% c("oligo-mesotrophic", "mesotrophic"), "mesotrophic", 
                                                   ifelse(trophic_status_combined %in% c("meso-eutrophic", "eutrophic"), "eutrophic", 
                                                          ifelse(trophic_status_combined %in% c("hypereutrophic", "eu-hypereutrophic"), "hypereutrophic", "not reported"))))) |> 
-    filter(res_name != "")
+              filter(res_name != "")
+
+       # De-duplicate with explicit composite key after typo/label corrections
+       dedup_key_cols <- c("name_yr", "res_name", "country", "study_years")
+
+       data <- data |>
+              mutate(
+                     dedup_key = paste(
+                            trimws(ifelse(is.na(name_yr), "", as.character(name_yr))),
+                            trimws(ifelse(is.na(res_name), "", as.character(res_name))),
+                            trimws(ifelse(is.na(country), "", as.character(country))),
+                            trimws(ifelse(is.na(study_years), "", as.character(study_years))),
+                            sep = "|"
+                     )
+              )
+
+       duplicate_waterbodies <- data |>
+              add_count(dedup_key, name = "dedup_n") |>
+              filter(dedup_n > 1) |>
+              arrange(dedup_key, name_yr, res_name) |>
+              select(all_of(dedup_key_cols), dedup_key, dedup_n, consecutive, phys_response, notes)
+
+       dedup_audit <- data |>
+              group_by(dedup_key) |>
+              mutate(dedup_row_order = row_number(), dedup_kept = dedup_row_order == 1L) |>
+              ungroup() |>
+              filter(!dedup_kept) |>
+              select(all_of(dedup_key_cols), dedup_key, dedup_row_order, notes)
+
+       rows_before_dedup <- nrow(data)
+
+       data <- data |>
+              group_by(dedup_key) |>
+              slice(1L) |>
+              ungroup()
+
+       dedup_summary <- tibble(
+              key_definition = "name_yr|res_name|country|study_years",
+              rows_before_dedup = rows_before_dedup,
+              rows_after_dedup = nrow(data),
+              dropped_rows = nrow(dedup_audit)
+       )
   
   # write_csv(data, here("Data/qaqced.csv"))
   
   return(list(
     data = data,
     excluded_papers = excluded_papers,
-    duplicate_waterbodies = duplicate_waterbodies
+              duplicate_waterbodies = duplicate_waterbodies,
+              dedup_audit = dedup_audit,
+              dedup_summary = dedup_summary
   ))
   
   

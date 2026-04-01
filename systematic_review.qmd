@@ -7,14 +7,14 @@ editor: visual
 
 ## Quarto
 
-This markdown
+This markdown:
 
-1.  reads in the extracted data from the systematic literature review
-2.  applies 1_qaqc_data_sysreview.R The primary functions of this script are to exclude any sites that were erroneously extracted, to de-duplicate any sites/data that were included in this review in multiple studies, and to fix assorted typos and mistakes in the raw extracted data.
-3.  applies 2_extract_drivers.R to create new columns for phytoplankton and cyanobacterial drivers, responses, and measured variables
+1.  reads in the extracted data from the systematic literature review.
+2.  applies 1_qaqc_data_sysreview.R. The primary functions of this script are to exclude any sites that were erroneously extracted, de-duplicate repeated site-study records using an explicit key, and fix assorted typos and mistakes in the raw extracted data.
+3.  applies 2_extract_drivers.R to create new columns for phytoplankton and cyanobacterial drivers, responses, and measured variables.
 4.  applies 3_proportion_WL.R to calculate proportional change in water level for the logistic regression.
-5.  Creates all of the manuscript figures
-6.  Creates all of the SI figures
+5.  creates all of the manuscript figures.
+6.  creates all of the supplemental information (SI) figures.
 
 ```{r}
   library(dplyr)
@@ -61,9 +61,18 @@ write.csv(data, file = here("Data/qaqc_sysreviewdata.csv"))
 
 #number of waterbodies
 reservoirs <- data |> select(c(res_name)) |> unique()
-#there are a total of 4 TGRs, so there are 65-3 reservoirs, = 62 total lakes!
-countries <- data |> select(c(country)) |> unique() #25 countries - Argentina/Uruguay, Estonia/Russia, one blank = 22 total countries
-studies <- data |> select(c(name_yr)) |> unique() #61 studies, some duplicate authors but no duplicate studies.
+countries <- data |> select(c(country)) |> unique()
+studies <- data |> select(c(name_yr)) |> unique()
+
+summary_counts <- tibble(
+  metric = c("reservoirs", "countries", "studies"),
+  value = c(
+    dplyr::n_distinct(data$res_name),
+    dplyr::n_distinct(data$country),
+    dplyr::n_distinct(data$name_yr)
+  )
+)
+summary_counts
 
 both_measured <- data |>
   select(res_name, increase_phyto_response, increase_cyano_response,
@@ -459,7 +468,7 @@ sitemap_trophic
 ggsave(paste0(here(),"/Manuscript_figures/sitemapposter.jpg"), plot = sitemap_trophic, height = 4, width = 10, units = "in")
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+The next chunk sources the function used to derive proportional water-level metrics.
 
 ```{r max depth and proportion water level}
 #uses propWL_logreg function found in proportion_WL.R
@@ -577,7 +586,7 @@ summary_tbl
 
 ## Plot logistic regression with combined water level increase/decrease
 
-This chunk will generate a logistic regression plots for both phytoplankton and cyanobacteria.
+This chunk will generate logistic regression plots for both phytoplankton and cyanobacteria.
 
 ```{r logreg plot}
 
@@ -686,7 +695,7 @@ tab_phyto_all <- boxplotdata2 %>%
   with(table(water_direction_final, response_final))
 
 # Run chi-square test
-# Are there differences in cyanobacterial responses to increases vs. decreases in water level?
+# Are there differences in phytoplankton responses to increases vs. decreases in water level?
 chisq_test(tab_phyto_all)
 f_chisq_test(tab_phyto_all) #Bonferroni - adj. p
 
@@ -1529,7 +1538,7 @@ combined
 ggsave(paste0(here(), "/Supplement_figures/drivers_all_WL.jpg"), plot = combined, height = 4, width = 8, units = "in")
 ```
 
-## Reverse LogReg
+## Reverse Logistic Regression
 
 ```{r reverse logreg}
 
