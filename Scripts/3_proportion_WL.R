@@ -1,5 +1,5 @@
 propWL_logreg <- function(data){
-
+# this script calculates proportional water-level changes and recodes phytoplankton and cyanobacterial responses for the logistic regression and chi-square analyses
 data |>
   
   # Replace empty strings in obs_maxdepth with NA
