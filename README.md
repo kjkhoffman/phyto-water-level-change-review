@@ -4,7 +4,7 @@ Code and data supplements for a manuscript by Hoffman et al. on "Declining water
 
 ## Files:
 
-There are five [update with new number after adding metadata!] files associated with this code and data supplement.
+There are six files associated with this code and data supplement.
 
 **systematic_review.qmd** - an overview quarto document that guides the user through each of the QAQC steps and runs each of the QAQC and data analysis functions. This .qmd also creates each of the figures in the manuscript and supplement.
 

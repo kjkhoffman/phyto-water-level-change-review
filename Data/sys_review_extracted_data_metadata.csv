@@ -1,0 +1,85 @@
+Data Table Column Name,Variable Name,Full statement or question used for extraction,Data type,Standardized categorical responses,Preferred units,Missing data code
+cov_num,Covidence number,"This value was assigned by Covidence, the literature review software",Numeric,NA,NA,NA
+name_yr,First author's last name and publishing year,"This value was assigned by Covidence, the literature review software",Text,NA,NA,NA
+title,Article title,"This value was assigned by Covidence, the literature review software",Text,NA,NA,NA
+reviewer,Reviewer,"This value was assigned by Covidence, the literature review software",Text,NA,NA,NA
+email,Email?,Good candidate for emailing author,Categorical,Yes; No,NA,NA
+notes,Notes,Notes,Text,NA,NA,NA
+num_res,More than one reservoir?,This study has more than one reservoir,Categorical,Yes; No,NA,NA
+num_water,Number of waterbodies,How many waterbodies are in this study?,Numeric,NA,NA,NA
+aim,Study aim,What was the aim of this study?,Text,NA,NA,NA
+country,Country,Country where reservoir is located  ,Text,NA,NA,NA
+res_name,Reservoir Name,Reservoir Name,Text,NA,NA,NA
+Latitude and Longitude (Decimal Degrees):,Latitude and Longitude (Decimal Degrees):,Section titled: Latitude and Longitude (Decimal Degrees),NA,NA,NA,NA
+lat_dd,Latitude (DD),Latitude (DD),Numeric,NA,decimal degree,NA
+long_dd,Longitude (DD),Longitude (DD),Numeric,NA,decimal degree,NA
+Depth (m):,Depth (m):,Section titled: Depth (m),NA,NA,NA,NA
+fullpond_maxdepth,Maximum depth at full pond,Maximum depth at full pond,Numeric,NA,meters,NA
+obs_maxdepth,Maximum depth observed,Maximum depth observed,Numeric,NA,meters,NA
+meandepth,Mean depth,Mean depth,Numeric,NA,meters,NA
+mindepth,Minimum depth observed,Minimum depth observed,Numeric,NA,meters,NA
+Volume (m^3):,Volume (m^3):,Section titled: Volume (m^3),NA,NA,NA,NA
+fullpond_maxvol,Max volume at full pond (m3),Max volume at full pond (m3),Numeric,NA,cubic meters,NA
+obs_maxvol,Max volume observed,Max volume observed,Numeric,NA,cubic meters,NA
+minvol,Minimum volume observed,Minimum volume observed,Numeric,NA,cubic meters,NA
+Surface area (km^2):,Surface area (km^2):,Section titled: Surface area (km^2),NA,NA,NA,NA
+fullpond_sa,Surface area at full pool,Surface area at full pool,Numeric,NA,square kilometers,NA
+obs_sa,Surface area observed,Surface area observed,Numeric,NA,square kilometers,NA
+trophic,Trophic Status,Trophic Status,Text,hypereutrophic;eu-hypereutrophic;eutrophic;meso-eutrophic;mesotrophic;oligo-mesotrophic;oligotrophic;not reported;other,,NA
+Trophic Status descriptors:,Trophic Status descriptors:,Section titled: Trophic Status descriptors,NA,NA,NA,NA
+mean_tp,Mean total phosphorus,Mean total phosphorus,Numeric,NA,micrograms per liter,NA
+mean_chla,Mean total chlorophyll,Mean total chlorophyll,Numeric,NA,micrograms per liter,NA
+secchi,Secchi Depth,Secchi Depth,Numeric,NA,meters,NA
+study_years,Length of Study (Years),Length of Study (Years),Numeric,NA,NA,NA
+consecutive,Consecutive years?,Were the years consecutive?,Categorical,Yes;No;Only one year of data;Unknown,NA,NA
+sample_months,Sample months,Months samples were collected in,Categorical,January; February; March; April; May; June; July; August; September; October; November; December,NA,NA
+sample_freq,Sample frequency,Frequency of chla/phyto/cyano sampling,Categorical,sub-daily;daily;weekly;fortnightly;monthly;quarterly;seasonally;irregular;other,NA,NA
+seasons,Seasons data was collected in,Which seasons were sampled?,Categorical,winter;spring;summer;fall;rainy;dry;monsoon;other,NA,NA
+sites_num,Number of sites,Number of sites sampled within the reservoir,Numeric,NA,NA,NA
+depth_type,What depth were samples collected?,One depth or multiple depths?,Categorical,One depth;Multiple depths;Integrated sample;Not reported;Other,NA,NA
+meas_wl,Water level measurement type,How was water level measured?,Categorical,remote sensing;ground-based measurements;other,NA,NA
+change_wl,Water level change section,Section titled: Water level change,,NA,NA,NA
+max_increase_vol,Maximum increase in volume,Volume change increase (m^3,Numeric,NA,cubic meters,NA
+max_decrease_vol,Maximum decrease in volume,Volume change decrease (m^3),Numeric,NA,cubic meters,NA
+elev_increase_max,Maximum change in elevation (increase),Elevation change increase (m),Numeric,NA,meters,NA
+elev_decrease_max,Maximum change in elevation (decrease),Elevation change decrease (m),Numeric,NA,meters,NA
+comments_wl_change,Comments on water level change,Comments on water level change,Text,NA,NA,NA
+Magnitude of water level change (%):,Magnitude of water level change (%):,Section titled: Magnitude of water level change (%),NA,NA,NA,NA
+perc_vol_increase,Percent volume increase,"Volume % change (increase, maximum)",Numeric,NA,percent,NA
+perc_vol_decrease,Percent volume decrease,"Volume % change (decrease, maximum)",Numeric,NA,percent,NA
+perc_depth_increase,percent depth increase,"Depth % change (increase, maximum)",Numeric,NA,percent,NA
+perc_depth_decrease,Percent depth decrease,"Depth % change (decrease, maximum)",Numeric,NA,percent,NA
+comments_perc_change,Comments on percent water level change,Comments on % water level change,Text,NA,NA,NA
+phys_vars,Physical variables,What physical variables were measured?,Categorical,"water temperature;water level;secchi/transparency;light (PAR, photic zone);turbidity;total suspended solids;total dissolved solids;other",NA,NA
+chem_vars,Chemical variables,What chemical variables were measured?,Categorical,pH;DO (dissolved oxygen);DOC (dissolved organic carbon);DIC (dissolved inorganic carbon);DOM (dissolved organic matter);POM (particulate organic matter);TP (total phosphorus);SRP (soluble reactive phosphorus);ORP (orthophosphate);TN (total nitrogen);TKN (total kjeldahl nitrogen);NO3 (nitrate);NO2 (nitrite);NH4/NH3+ (ammonia/ammonium);DIN (dissolved inorganic nitrogen);metals;conductivity;salinity;other,NA,NA
+bio_vars,Biological variables,What biotic variables were measured?,Categorical,filtered chlorophyll (ug/L);sensor chlorophyll (ug/L);sensor chlorophyll (RFUs);flouroprobe (sensor phyto groups);phytoplankton microscopy;single cyanobacterial taxon;cyanobacterial toxins;other,NA,NA
+wld_type,Water level decrease type,Characterize the water level decrease.,Categorical,Drawdown for flood prevention;Drawdown for dam maintenance;Drawdown for eco-flow;Drawdown due to water consumption;Drawdown due to water diversion;Drawdown due to drought;Seasonal variability;Decrease for another reason,NA,NA
+wli_type,Water level increase type,Characterize the water level increase.,Categorical,Decrease/stop of water release;Water diversion;Managed increase in flow from upstream;Decrease in water consumption;Flooding;Monsoon;Hurricane;Seasonal variability;Return to non-drought conditions;Increase for another reason,NA,NA
+comments_wl_change,Comments on water level change,Notes to describe water level change,Text,NA,NA,NA
+trophic_change,Trophic status change,Does the study report a change in trophic status under changed water level?,Categorical,Yes; No,NA,NA
+phys_response,Physical response,What physical variables did the authors identify as exhibiting a response to water level change?,Categorical,"water temperature;secchi/transparency;light (PAR, photic zone);turbidity;total suspended solids;total dissolved solids;other",NA,NA
+chem_response,Chemical response,What chemical variables did the authors identify as exhibiting a response to water level change?,Categorical,pH;DO (dissolved oxygen);DOC (dissolved organic carbon);DIC (dissolved inorganic carbon);DOM (dissolved organic matter);POM (particulate organic matter);TP (total phosphorus);SRP (soluble reactive phosphorus);ORP (orthophosphate);TN (total nitrogen);TKN (total kjeldahl nitrogen);NO3 (nitrate);NO2 (nitrite);NH4/NH3+ (ammonia/ammonium);DIN (dissolved inorganic nitrogen);metals;conductivity;salinity;other,NA,NA
+phys_drive,Physical drivers,What physical variables did the authors identify as driving phytoplankton/cyanobacteria/chlorophyll response?,Categorical,"water temperature;water level;secchi/transparency;light (PAR, photic zone);turbidity;total suspended solids;total dissolved solids;other",NA,NA
+chem_drive,Chemical drivers,What chemical variables did the authors identify as driving phytoplankton/cyanobacteria/chlorophyll response?,Categorical,pH;DO (dissolved oxygen);DOC (dissolved organic carbon);DIC (dissolved inorganic carbon);DOM (dissolved organic matter);POM (particulate organic matter);TP (total phosphorus);SRP (soluble reactive phosphorus);ORP (orthophosphate);TN (total nitrogen);TKN (total kjeldahl nitrogen);NO3 (nitrate);NO2 (nitrite);NH4/NH3+ (ammonia/ammonium);DIN (dissolved inorganic nitrogen);metals;conductivity;salinity;other,NA,NA
+decrease_phyto_response,Decrease phytoplankton response,What was the phytoplankton response to water level decreases or drought?,Categorical,Increase in phytoplankton;Decrease in phytoplankton;No significant response;Not measured;Other,NA,NA
+decrease_cyano_response,Decrease cyanobacteria response,What was the cyanobacterial response to water level decreases or drought?,Categorical,Increase in cyanobacteria;Decrease in cyanobacteria;No significant response;Not measured;Other,NA,NA
+decrease_toxin_response,Decrease toxin response,What was the toxicity response to water level decrease?,Categorical,Increase in cyanobacterial toxins;Decrease in cyanobacterial toxins;No significant response;Not measured;Other,NA,NA
+decrease_phytocomm_response,Decrease phytoplankton community response,What was the phytoplankton community response to water level decrease?,Categorical,shift to cyanos; shift away from cyanos; shift in dominant phytoplankton group that is not cyanos; Not measured; Other,NA,NA
+increase_phyto_response,Increase phytoplankton response,What was the phytoplankton response to water level increase?,Categorical,Increase in phytoplankton;Decrease in phytoplankton;No significant response;Not measured;Other,NA,NA
+increase_cyano_response,Increase cyanobacteria response,What was the cyanobacteria response to water level increase,Categorical,Increase in cyanobacteria;Decrease in cyanobacteria;No significant response;Not measured;Other,NA,NA
+increase_toxin_response,Increase toxin response,What was the toxicity response to water level increase?,Categorical,Increase in cyanobacterial toxins;Decrease in cyanobacterial toxins;No significant response;Not measured;Other,NA,NA
+increase_phytocomm_response,Increase phytoplankton community response,What was the community response to water level increase?,Categorical,shift to cyanos; shift away from cyanos; shift in dominant phytoplankton group that is not cyanos; Not measured; Other,NA,NA
+quant_response,Quantify response,"Section titled: Quantify the response to water level change, if applicable",NA,NA,NA,NA
+chla_ugL_low,Chlorophyll concentration under the low water level condition,Chlorophyll concentration under the low water level condition,Numeric,NA,micrograms per liter,NA
+chla_ugL_normal,Chlorophyll concentration under the normal water level condition,Chlorophyll concentration under the normal water level condition,Numeric,NA,micrograms per liter,NA
+chla_ugL_high,Chlorophyll concentration under the high water level condition,Chlorophyll concentration under the high water level condition,Numeric,NA,micrograms per liter,NA
+phytobio_low,Phytoplankton Biomass/Biovolume under the low water level condition,Phytoplankton Biomass/Biovolume under the low water level condition,Numeric,NA,grams per cubic meter or cells per milliliter,NA
+phytobio_normal,Phytoplankton Biomass/Biovolume under the normal water level condition,Phytoplankton Biomass/Biovolume under the normal water level condition,Numeric,NA,grams per cubic meter or cells per milliliter,NA
+phytobio_high,Phytoplankton Biomass/Biovolume under the high water level condition,Phytoplankton Biomass/Biovolume under the high water level condition,Numeric,NA,grams per cubic meter or cells per milliliter,NA
+cyano_low,Cyanobacteria Biomass/Biovolume under the low water level condition,Cyanobacteria Biomass/Biovolume under the low water level condition,Numeric,NA,grams per cubic meter or cells per milliliter,NA
+cyano_normal,Cyanobacteria Biomass/Biovolume under the normal water level condition,Cyanobacteria Biomass/Biovolume under the normal water level condition,Numeric,NA,grams per cubic meter or cells per milliliter,NA
+cyano_high,Cyanobacteria Biomass/Biovolume under the high water level condition,Cyanobacteria Biomass/Biovolume under the high water level condition,Numeric,NA,grams per cubic meter or cells per milliliter,NA
+toxin_low,Cyanobacterial toxin concentration under the low water level condition,Cyanobacterial toxin concentration under the low water level condition,Numeric,NA,NA,NA
+toxin_normal,Cyanobacterial toxin concentration under the normal water level condition,Cyanobacterial toxin concentration under the normal water level condition,Numeric,NA,NA,NA
+toxin_high,Cyanobacterial toxin concentration under the high water level condition,Cyanobacterial toxin concentration under the high water level condition,Numeric,NA,NA,NA
+exemplary,Exemplary,This paper was exemplary! ,Categorical,Yes; No,NA,NA
