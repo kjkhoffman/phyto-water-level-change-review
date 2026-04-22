@@ -104,7 +104,7 @@ combined_vars <- data_ready |>
     ph_vars  = ifelse(grepl("pH;", chem_vars), 1, 0),
     do_vars  = ifelse(grepl("DO \\(", chem_vars), 1, 0),
     srp_vars = ifelse(grepl("SRP \\(", chem_vars), 1, 0),
-    no3_vars = ifelse(grepl("NO3 \\", chem_vars), 1, 0),
+    no3_vars = ifelse(grepl("NO3 \\(", chem_vars), 1, 0),
     cond_vars = ifelse(grepl("conductivity;", chem_vars), 1, 0),
     metals_vars = ifelse(grepl("metals;", chem_vars), 1, 0),
     orp_vars = ifelse(grepl("ORP \\(", chem_vars), 1, 0),
