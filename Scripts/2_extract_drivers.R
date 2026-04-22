@@ -1,30 +1,41 @@
 extract_drivers <- function(data){
-  
-  # This script converts extracted text fields into binary indicator columns for measured variables, drivers, and variables that responded to water level change. 
-  
-combined_vars <- data |> 
+
+  # This script converts extracted text fields into binary indicator columns for measured variables, drivers, and variables that responded to water level change.
+
+  # Create data_ready, a data frame that is ready for grepping.
+  # Appending a semicolon to the end of each driver column allows us to
+  # protect against accidental string subset grepping below (and still catch
+  # an element if it is the last one listed)
+  data_ready <- data |>
+    mutate(
+      chem_drive = paste0(chem_drive, ";"),
+      chem_response = paste0(chem_response, ";"),
+      chem_vars = paste0(chem_vars, ";")
+    )
+
+combined_vars <- data_ready |>
   mutate(
     #---------------- DRIVERS ----------------#
-    tp_drive  = ifelse(grepl("TP", chem_drive, ignore.case = TRUE), 1, 0),
-    tn_drive  = ifelse(grepl("TN", chem_drive, ignore.case = TRUE), 1, 0),
-    nh4_drive = ifelse(grepl("NH4", chem_drive, ignore.case = TRUE), 1, 0),
-    ph_drive  = ifelse(grepl("pH", chem_drive, ignore.case = TRUE), 1, 0),
-    do_drive  = ifelse(grepl("DO", chem_drive, ignore.case = TRUE), 1, 0),
-    srp_drive = ifelse(grepl("SRP", chem_drive, ignore.case = TRUE), 1, 0),
-    no3_drive = ifelse(grepl("NO3", chem_drive, ignore.case = TRUE), 1, 0),
-    cond_drive = ifelse(grepl("conductivity", chem_drive, ignore.case = TRUE), 1, 0),
-    metals_drive = ifelse(grepl("metals", chem_drive, ignore.case = TRUE), 1, 0),
-    orp_drive = ifelse(grepl("ORP", chem_drive, ignore.case = TRUE), 1, 0),
-    no2_drive = ifelse(grepl("NO2", chem_drive, ignore.case = TRUE), 1, 0),
-    dic_drive = ifelse(grepl("DIC", chem_drive, ignore.case = TRUE), 1, 0),
-    dom_drive = ifelse(grepl("DOM", chem_drive, ignore.case = TRUE), 1, 0),
-    pom_drive = ifelse(grepl("POM", chem_drive, ignore.case = TRUE), 1, 0),
-    tkn_drive = ifelse(grepl("TKN", chem_drive, ignore.case = TRUE), 1, 0),
-    doc_drive = ifelse(grepl("DOC", chem_drive, ignore.case = TRUE), 1, 0),
-    din_drive = ifelse(grepl("DIN", chem_drive, ignore.case = TRUE), 1, 0),
-    salinity_drive = ifelse(grepl("salinity", chem_drive, ignore.case = TRUE), 1, 0),
+    tp_drive  = ifelse(grepl("TP;|TP \\(", chem_drive), 1, 0),
+    tn_drive  = ifelse(grepl("TN;|TN \\(", chem_drive), 1, 0),
+    nh4_drive = ifelse(grepl("NH4/", chem_drive), 1, 0),
+    ph_drive  = ifelse(grepl("pH;", chem_drive), 1, 0),
+    do_drive  = ifelse(grepl("DO;", chem_drive), 1, 0),
+    srp_drive = ifelse(grepl("SRP;", chem_drive), 1, 0),
+    no3_drive = ifelse(grepl("NO3", chem_drive), 1, 0),
+    cond_drive = ifelse(grepl("conductivity;", chem_drive), 1, 0),
+    metals_drive = ifelse(grepl("metals;", chem_drive), 1, 0),
+    orp_drive = ifelse(grepl("ORP;", chem_drive), 1, 0),
+    no2_drive = ifelse(grepl("NO2;", chem_drive), 1, 0),
+    dic_drive = ifelse(grepl("DIC;", chem_drive), 1, 0),
+    dom_drive = ifelse(grepl("DOM;", chem_drive), 1, 0),
+    pom_drive = ifelse(grepl("POM;", chem_drive), 1, 0),
+    tkn_drive = ifelse(grepl("TKN;", chem_drive), 1, 0),
+    doc_drive = ifelse(grepl("DOC;", chem_drive), 1, 0),
+    din_drive = ifelse(grepl("DIN;", chem_drive), 1, 0),
+    salinity_drive = ifelse(grepl("salinity", chem_drive), 1, 0),
     other_chem_drive = ifelse(grepl("Other", chem_drive, ignore.case = TRUE), 1, 0),
-    
+
     water_level_drive = ifelse(grepl("water level", phys_drive, ignore.case = TRUE), 1, 0),
     water_temp_drive  = ifelse(grepl("water temperature", phys_drive, ignore.case = TRUE), 1, 0),
     transparency_drive = ifelse(grepl("transparency", phys_drive, ignore.case = TRUE), 1, 0),
@@ -40,7 +51,7 @@ combined_vars <- data |>
     precip_drive = ifelse(grepl("precip|rain", phys_drive, ignore.case = TRUE), 1, 0),
     air_temp_drive = ifelse(grepl("air", phys_drive, ignore.case = TRUE), 1, 0),
     other_phys_drive = ifelse(grepl("Other", phys_drive, ignore.case = TRUE), 1, 0),
-    
+
     #---------------- RESPONSES ----------------#
     not_assessed_response = ifelse(grepl("not assessed", phys_response, ignore.case = TRUE), 1, 0),
     water_temp_response = ifelse(grepl("water temperature", phys_response, ignore.case = TRUE), 1, 0),
@@ -59,54 +70,54 @@ combined_vars <- data |>
     precip_response = ifelse(grepl("precip|rain", phys_response, ignore.case = TRUE), 1, 0),
     air_temp_response = ifelse(grepl("air", phys_response, ignore.case = TRUE), 1, 0),
     other_phys_response = ifelse(grepl("Other", phys_response, ignore.case = TRUE), 1, 0),
-    
-    tp_response  = ifelse(grepl("TP", chem_response, ignore.case = TRUE), 1, 0),
-    tn_response  = ifelse(grepl("TN", chem_response, ignore.case = TRUE), 1, 0),
-    nh4_response = ifelse(grepl("NH4", chem_response, ignore.case = TRUE), 1, 0),
-    ph_response  = ifelse(grepl("pH", chem_response, ignore.case = TRUE), 1, 0),
-    do_response  = ifelse(grepl("DO", chem_response, ignore.case = TRUE), 1, 0),
-    srp_response = ifelse(grepl("SRP", chem_response, ignore.case = TRUE), 1, 0),
-    no3_response = ifelse(grepl("NO3", chem_response, ignore.case = TRUE), 1, 0),
-    cond_response = ifelse(grepl("conductivity", chem_response, ignore.case = TRUE), 1, 0),
-    metals_response = ifelse(grepl("metals", chem_response, ignore.case = TRUE), 1, 0),
-    orp_response = ifelse(grepl("ORP", chem_response, ignore.case = TRUE), 1, 0),
-    no2_response = ifelse(grepl("NO2", chem_response, ignore.case = TRUE), 1, 0),
-    doc_response = ifelse(grepl("DOC", chem_response, ignore.case = TRUE), 1, 0),
-    dic_response = ifelse(grepl("DIC", chem_response, ignore.case = TRUE), 1, 0),
-    dom_response = ifelse(grepl("DOM", chem_response, ignore.case = TRUE), 1, 0),
-    pom_response = ifelse(grepl("POM", chem_response, ignore.case = TRUE), 1, 0),
-    tkn_response = ifelse(grepl("TKN", chem_response, ignore.case = TRUE), 1, 0),
-    din_response = ifelse(grepl("DIN", chem_response, ignore.case = TRUE), 1, 0),
-    salinity_response = ifelse(grepl("salinity", chem_response, ignore.case = TRUE), 1, 0),
+
+    tp_response  = ifelse(grepl("TP;|TP \\(", chem_response), 1, 0),
+    tn_response  = ifelse(grepl("TN;|TN \\(", chem_response), 1, 0),
+    nh4_response = ifelse(grepl("NH4/", chem_response), 1, 0),
+    ph_response  = ifelse(grepl("pH;", chem_response), 1, 0),
+    do_response  = ifelse(grepl("DO;|DO \\(", chem_response), 1, 0),
+    srp_response = ifelse(grepl("SRP;|SRP \\(", chem_response), 1, 0),
+    no3_response = ifelse(grepl("NO3;|NO3 \\(", chem_response), 1, 0),
+    cond_response = ifelse(grepl("conductivity;", chem_response), 1, 0),
+    metals_response = ifelse(grepl("metals;", chem_response), 1, 0),
+    orp_response = ifelse(grepl("ORP;", chem_response), 1, 0),
+    no2_response = ifelse(grepl("NO2;|NO2 \\(", chem_response), 1, 0),
+    doc_response = ifelse(grepl("DOC;", chem_response), 1, 0),
+    dic_response = ifelse(grepl("DIC;", chem_response), 1, 0),
+    dom_response = ifelse(grepl("DOM;", chem_response), 1, 0),
+    pom_response = ifelse(grepl("POM;", chem_response), 1, 0),
+    tkn_response = ifelse(grepl("TKN;", chem_response), 1, 0),
+    din_response = ifelse(grepl("DIN;|DIN \\(", chem_response), 1, 0),
+    salinity_response = ifelse(grepl("salinity;", chem_response), 1, 0),
     other_chem_response = ifelse(grepl("Other", chem_response, ignore.case = TRUE), 1, 0),
-    
+
     #---------------- VARIABLES MEASURED ----------------#
     filt_chla_vars = ifelse(grepl("filtered chlorophyll", bio_vars, ignore.case = TRUE), 1, 0),
     phyto_micros_vars = ifelse(grepl("phytoplankton microscopy", bio_vars, ignore.case = TRUE), 1, 0),
     single_cyano_taxon_vars = ifelse(grepl("single cyanobacterial taxon", bio_vars, ignore.case = TRUE), 1, 0),
     sensor_chla_vars = ifelse(grepl("sensor", bio_vars, ignore.case = TRUE), 1, 0),
     other_bio_vars = ifelse(grepl("Other", bio_vars, ignore.case = TRUE), 1, 0),
-    
-    tp_vars  = ifelse(grepl("TP", chem_vars, ignore.case = TRUE), 1, 0),
-    tn_vars  = ifelse(grepl("TN", chem_vars, ignore.case = TRUE), 1, 0),
-    nh4_vars = ifelse(grepl("NH4", chem_vars, ignore.case = TRUE), 1, 0),
-    ph_vars  = ifelse(grepl("pH", chem_vars, ignore.case = TRUE), 1, 0),
-    do_vars  = ifelse(grepl("DO", chem_vars, ignore.case = TRUE), 1, 0),
-    srp_vars = ifelse(grepl("SRP", chem_vars, ignore.case = TRUE), 1, 0),
-    no3_vars = ifelse(grepl("NO3", chem_vars, ignore.case = TRUE), 1, 0),
-    cond_vars = ifelse(grepl("conductivity", chem_vars, ignore.case = TRUE), 1, 0),
-    metals_vars = ifelse(grepl("metals", chem_vars, ignore.case = TRUE), 1, 0),
-    orp_vars = ifelse(grepl("ORP", chem_vars, ignore.case = TRUE), 1, 0),
-    no2_vars = ifelse(grepl("NO2", chem_vars, ignore.case = TRUE), 1, 0),
-    doc_vars = ifelse(grepl("DOC", chem_vars, ignore.case = TRUE), 1, 0),
-    dic_vars = ifelse(grepl("DIC", chem_vars, ignore.case = TRUE), 1, 0),
-    dom_vars = ifelse(grepl("DOM", chem_vars, ignore.case = TRUE), 1, 0),
-    pom_vars = ifelse(grepl("POM", chem_vars, ignore.case = TRUE), 1, 0),
-    tkn_vars = ifelse(grepl("TKN", chem_vars, ignore.case = TRUE), 1, 0),
-    din_vars = ifelse(grepl("DIN", chem_vars, ignore.case = TRUE), 1, 0),
-    salinity_vars = ifelse(grepl("salinity", chem_vars, ignore.case = TRUE), 1, 0),
+
+    tp_vars  = ifelse(grepl("TP \\(", chem_vars), 1, 0),
+    tn_vars  = ifelse(grepl("TN \\(", chem_vars), 1, 0),
+    nh4_vars = ifelse(grepl("NH4/", chem_vars), 1, 0),
+    ph_vars  = ifelse(grepl("pH;", chem_vars), 1, 0),
+    do_vars  = ifelse(grepl("DO \\(", chem_vars), 1, 0),
+    srp_vars = ifelse(grepl("SRP \\(", chem_vars), 1, 0),
+    no3_vars = ifelse(grepl("NO3 \\", chem_vars), 1, 0),
+    cond_vars = ifelse(grepl("conductivity;", chem_vars), 1, 0),
+    metals_vars = ifelse(grepl("metals;", chem_vars), 1, 0),
+    orp_vars = ifelse(grepl("ORP \\(", chem_vars), 1, 0),
+    no2_vars = ifelse(grepl("NO2 \\(", chem_vars), 1, 0),
+    doc_vars = ifelse(grepl("DOC \\(", chem_vars), 1, 0),
+    dic_vars = ifelse(grepl("DIC \\(", chem_vars), 1, 0),
+    dom_vars = ifelse(grepl("DOM \\(", chem_vars), 1, 0),
+    pom_vars = ifelse(grepl("POM \\(", chem_vars), 1, 0),
+    tkn_vars = ifelse(grepl("TKN \\(", chem_vars), 1, 0),
+    din_vars = ifelse(grepl("DIN \\(", chem_vars), 1, 0),
+    salinity_vars = ifelse(grepl("salinity;", chem_vars), 1, 0),
     other_chem_vars = ifelse(grepl("Other", chem_vars, ignore.case = TRUE), 1, 0),
-    
+
     water_level_vars = ifelse(grepl("water level", phys_vars, ignore.case = TRUE), 1, 0),
     water_temp_vars  = ifelse(grepl("water temperature", phys_vars, ignore.case = TRUE), 1, 0),
     transparency_vars = ifelse(grepl("transparency", phys_vars, ignore.case = TRUE), 1, 0),
@@ -115,14 +126,14 @@ combined_vars <- data |>
     tds_vars = ifelse(grepl("tds|total dissolved solid", phys_vars, ignore.case = TRUE), 1, 0),
     tss_vars = ifelse(grepl("total suspended solids|tss|resuspension", phys_vars, ignore.case = TRUE), 1, 0),
     nor_tss_vars = ifelse(grepl("total suspended solids|tss", phys_vars, ignore.case = TRUE), 1, 0),
-    other_phys_vars = ifelse(grepl("Other", phys_vars, ignore.case = TRUE), 1, 0), 
+    other_phys_vars = ifelse(grepl("Other", phys_vars, ignore.case = TRUE), 1, 0),
     strat_vars = ifelse(grepl("mix|stab|strat", phys_vars, ignore.case = TRUE), 1, 0),
     restime_vars = ifelse(grepl("residence", phys_vars, ignore.case = TRUE), 1, 0),
     flush_discharge_vars = ifelse(grepl("flush|discharge", phys_vars, ignore.case = TRUE), 1, 0),
     inflow_vars = ifelse(grepl("inflow", phys_vars, ignore.case = TRUE), 1, 0),
     precip_vars = ifelse(grepl("precip|rain", phys_vars, ignore.case = TRUE), 1, 0),
     air_temp_vars = ifelse(grepl("air", phys_vars, ignore.case = TRUE), 1, 0),
-    other_phys_vars = ifelse(grepl("Other", phys_vars, ignore.case = TRUE), 1, 0)) |> 
+    other_phys_vars = ifelse(grepl("Other", phys_vars, ignore.case = TRUE), 1, 0)) |>
 
 # If a variable has a 1 in its _drive or _response column,
 # ensure the corresponding _vars column is also set to 1
@@ -147,7 +158,7 @@ mutate(
   tkn_vars      = ifelse(tkn_drive == 1      | tkn_response == 1,      1, tkn_vars),
   din_vars      = ifelse(din_drive == 1      | din_response == 1,      1, din_vars),
   salinity_vars = ifelse(salinity_drive == 1 | salinity_response == 1, 1, salinity_vars),
-  
+
   # Physical vars
   water_level_vars      = ifelse(water_level_drive == 1,                                    1, water_level_vars),
   water_temp_vars       = ifelse(water_temp_drive == 1      | water_temp_response == 1,     1, water_temp_vars),
