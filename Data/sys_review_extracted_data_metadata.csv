@@ -9,6 +9,12 @@ num_res,More than one reservoir?,This study has more than one reservoir,Categori
 num_water,Number of waterbodies,How many waterbodies are in this study?,Numeric,NA,NA,NA
 aim,Study aim,What was the aim of this study?,Text,NA,NA,NA
 country,Country,Country where reservoir is located  ,Text,NA,NA,NA
+closest_USGS_name,Closest USGS names,The closest named location in the USGS geographic names system,,,,
+latusgs_close,Closest USGS name latitude,The latitude of the closest named location in the USGS geographic names system,,,,
+longusgs_close,Closest USGS name longitude,The longitude of the closest named location in the USGS geographic names system,,,,
+USGS_name,Official USGS name,The name of the reservoir in the USGS geographic names system,,,,
+Lat_usgs,Official USGS name latitude,The latitude of the named location in the USGS geographic names system,,,,
+Long_usgs,Official USGS name longitude,The longitude of the named location in the USGS geographic names system,,,,
 res_name,Reservoir Name,Reservoir Name,Text,NA,NA,NA
 Latitude and Longitude (Decimal Degrees):,Latitude and Longitude (Decimal Degrees):,Section titled: Latitude and Longitude (Decimal Degrees),NA,NA,NA,NA
 lat_dd,Latitude (DD),Latitude (DD),Numeric,NA,decimal degree,NA
