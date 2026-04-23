@@ -107,8 +107,8 @@ propWL_logreg <- function(data){
     # Cyanobacteria response text for water level increase
     mutate(cyano_response_wl_up = case_when(
       grepl("No significant response", increase_cyano_response) ~ "Not significant",
-      grepl("Decrease in cyanobacteria", increase_cyano_response) ~ "Decrease ",
-      grepl("Increase in cyanobacteria", increase_cyano_response) ~ "Increase ",
+      grepl("Decrease in cyanobacteria", increase_cyano_response) ~ "Decrease",
+      grepl("Increase in cyanobacteria", increase_cyano_response) ~ "Increase",
       grepl("shift", increase_cyano_response) ~ "Shift",
       TRUE ~ NA_character_
     )) |>
@@ -118,7 +118,7 @@ propWL_logreg <- function(data){
       grepl("No significant response", decrease_cyano_response) ~ "Not significant",
       grepl("Decrease in cyanobacteria", decrease_cyano_response) ~ "Decrease",
       grepl("Increase in cyanobacteria", decrease_cyano_response) ~ "Increase",
-      grepl("shift", decrease_cyano_response) ~ "Shift to \n Cyanobacteria \n dominated\n community",
+      grepl("shift", decrease_cyano_response) ~ "Shift",
       TRUE ~ NA_character_
     )) |>
 
@@ -154,8 +154,8 @@ propWL_logreg <- function(data){
     # Phytoplankton response text for water level increase
     mutate(phyto_response_wl_up = case_when(
       grepl("No significant response", increase_phyto_response) ~ "Not significant",
-      grepl("Decrease in phytoplankton", increase_phyto_response) ~ "Decrease ",
-      grepl("Increase in phytoplankton", increase_phyto_response) ~ "Increase ",
+      grepl("Decrease in phytoplankton", increase_phyto_response) ~ "Decrease",
+      grepl("Increase in phytoplankton", increase_phyto_response) ~ "Increase",
       grepl("shift", increase_phyto_response) ~ "Shift",
       TRUE ~ NA_character_
     )) |>
@@ -165,7 +165,7 @@ propWL_logreg <- function(data){
       grepl("No significant response", decrease_phyto_response) ~ "Not significant",
       grepl("Decrease in phytoplankton", decrease_phyto_response) ~ "Decrease",
       grepl("Increase in phytoplankton", decrease_phyto_response) ~ "Increase",
-      grepl("shift", decrease_phyto_response) ~ "Shift to\n Cyanobacteria\n dominated\n community",
+      grepl("shift", decrease_phyto_response) ~ "Shift",
       TRUE ~ NA_character_
     )) |>
 
