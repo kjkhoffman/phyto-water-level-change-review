@@ -1,6 +1,6 @@
 # phyto-water-level-change-review
 
-Code and data supplements for a manuscript by Hoffman et al. on "Declining water levels are associated with increasing phytoplankton and cyanobacteria in a global set of lakes and reservoirs: a systematic literature review."
+Code and data supplements for a manuscript by Hoffman et al. on "Declining water levels are associated with increased phytoplankton and cyanobacteria in a global set of lakes and reservoirs: a systematic literature review."
 
 ## Files:
 
