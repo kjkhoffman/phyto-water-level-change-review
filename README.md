@@ -18,6 +18,8 @@ There are six files associated with this code and data supplement.
 
 **sys_review_extracted_data_metadata.csv -** Metadata for sys_review_extracted_data.csv. This file associates the column names from sys_review_extracted_data.csv with variable names and the full statement/question used for data extraction in the extraction template. This file also categorizes the data type for each column. For categorical variables, a list of the explicitly extracted categories is provided. For any categorical variable that includes "other" as a response category, an optional text box was given in the extraction template. As such, categorical variables may include more text responses than what is included in this column. This file includes a column for "Preferred units". These are the units that numeric values in the associated columns should have. The script "**1_qaqc_data_sysreview.R"** ensures that preferred units are used. The raw data may have some values that are not in preferred units.
 
+**CovidenceExtractionTemplate_Waterleveldeclinesincreasephytoplankton.pdf** - Extraction template used in Covidence for data extraction from the studies included in this review. Studies that contained multiple waterbodies were extracted using the same questions and prompts in google sheets.
+
 ## User instructions:
 
 To QAQC the data and to create all of the figures associated with this manuscript, users can open and run the code in systematic_review.qmd. To understand exactly the steps in each of the three functions, please see the script associated with each function (scripts 1-3).
