@@ -51,6 +51,7 @@ combined_vars <- data_ready |>
     precip_drive = ifelse(grepl("precip|rain", phys_drive, ignore.case = TRUE), 1, 0),
     air_temp_drive = ifelse(grepl("air", phys_drive, ignore.case = TRUE), 1, 0),
     other_phys_drive = ifelse(grepl("Other", phys_drive, ignore.case = TRUE), 1, 0),
+    watercolor_drive = ifelse(grepl("water color", phys_response, ignore.case = TRUE), 1, 0),
 
     #---------------- RESPONSES ----------------#
     not_assessed_response = ifelse(grepl("not assessed", phys_response, ignore.case = TRUE), 1, 0),
@@ -133,6 +134,7 @@ combined_vars <- data_ready |>
     inflow_vars = ifelse(grepl("inflow", phys_vars, ignore.case = TRUE), 1, 0),
     precip_vars = ifelse(grepl("precip|rain", phys_vars, ignore.case = TRUE), 1, 0),
     air_temp_vars = ifelse(grepl("air", phys_vars, ignore.case = TRUE), 1, 0),
+    watercolor_vars = ifelse(grepl("water color", phys_response, ignore.case = TRUE), 1, 0),
     other_phys_vars = ifelse(grepl("Other", phys_vars, ignore.case = TRUE), 1, 0)) |>
 
 # If a variable has a 1 in its _drive or _response column,
@@ -173,6 +175,7 @@ mutate(
   flush_discharge_vars  = ifelse(flush_discharge_drive == 1 | flush_discharge_response == 1,1, flush_discharge_vars),
   inflow_vars           = ifelse(inflow_drive == 1          | inflow_response == 1,         1, inflow_vars),
   precip_vars           = ifelse(precip_drive == 1          | precip_response == 1,         1, precip_vars),
+  watercolor_vars           = ifelse(watercolor_drive == 1          | watercolor_response == 1,         1, watercolor_vars),
   air_temp_vars         = ifelse(air_temp_drive == 1        | air_temp_response == 1,       1, air_temp_vars))
 
 
