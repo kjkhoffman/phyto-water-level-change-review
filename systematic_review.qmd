@@ -165,6 +165,7 @@ phys_labels <- c("water_level" = "Water level",
                   "light"       = "Light",
                   "tss"         = "TSS",
                   "transparency"= "Transparency")
+
 chem_labels <- c("tn"   = "TN",
                   "tp"   = "TP",
                   "nh4"  = "NH4",
@@ -204,7 +205,7 @@ mutate(names = factor(names, levels = unique(names))) |>
     axis.title.y = element_text(angle = 90, vjust = .5, size = 12))
 
 phys_phyto_only_drivers <- phyto_only  |> 
-  select(matches("^(water|transparency|turb|light|tss).*(?:_vars|_drive)$"), res_name, name_yr) |> select(-c(res_name, name_yr)) |> 
+  select(matches("^(water|transparency|turb|light|tss).*(?:_vars|_drive)$"), res_name, name_yr) |> select(-c(res_name, name_yr, watercolor_vars, watercolor_drive)) |> 
 mutate(total_wl = ifelse(water_level_drive == 1 & water_level_vars == 0, 1, water_level_vars), 
        water_level_vars = total_wl) |> 
   select(-c(total_wl))
@@ -322,7 +323,7 @@ phys_cyano_only_drivers <- cyano_only  |>
   select(matches("^(water|transparency|turb|light|tss).*(?:_vars|_drive)$"), res_name, name_yr) |> select(-c(res_name, name_yr)) |> 
 mutate(total_wl = ifelse(water_level_drive == 1 & water_level_vars == 0, 1, water_level_vars), 
        water_level_vars = total_wl) |> 
-  select(-c(total_wl))
+  select(-c(total_wl, watercolor_drive, watercolor_vars))
   
 phys_cyano_sums <-phys_cyano_only_drivers %>%
   summarise(across(everything(), sum, na.rm = TRUE))
@@ -1381,7 +1382,7 @@ mutate(names = factor(names, levels = unique(names))) |>
   scale_fill_manual(
     values = c("#CC6060", "#F2DADA"),
     labels = c("Important", "Not Important"),
-    name = "Phyto + Cyano:\nDid authors identify\nthis driver as important?") +
+    name = "Did authors identify\nthis driver as important?") +
   theme_bw() +
   labs(y = "") +
   theme(
@@ -1431,7 +1432,7 @@ mutate(names = factor(names, levels = unique(names))) |>
   scale_fill_manual(
     values = c("#CC6060", "#F2DADA"),
     labels = c("Important", "Not Important"),
-    name = "Phyto + Cyano:\nDid authors identify\nthis driver as important?") +
+    name = "Did authors identify\nthis driver as important?") +
   theme_bw() +
   labs(y = "") +
   theme(
@@ -1492,7 +1493,7 @@ mutate(names = factor(names, levels = unique(names))) |>
   scale_fill_manual(
     values = c("#8680cc", "#cfcdef"),
     labels = c("Yes", "No"),
-    name = "Phyto + Cyano:\nDid authors identify\nthis variable as changing\nwith water level?") +
+    name = "Did authors identify\nthis variable as changing\nwith water level?") +
   theme_bw() +
   labs(y = "") +
   theme(
@@ -1546,7 +1547,7 @@ phys_pc_WL <- physicalvars_phyto_cyano_WL |>
   scale_fill_manual(
     values = c("#8680cc", "#cfcdef"),
     labels = c("Yes", "No"),
-    name = "Phyto + Cyano:\nDid authors identify\nthis variable as changing\nwith water level?") +
+    name = "Did authors identify\nthis variable as changing\nwith water level?") +
   theme_bw() +
   labs(y = "") +
   theme(
