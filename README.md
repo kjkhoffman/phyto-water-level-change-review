@@ -6,6 +6,8 @@ Code and data supplements for a manuscript by Hoffman et al. on "Declining water
 
 There are six files associated with this code and data supplement.
 
+**systematic_review_additions.qmd** - an overview quarto document that guides the user through each of the QAQC steps and runs each of the QAQC and data analysis functions. This .qmd has been updated from "systematic_review.qmd" in response to the review process. This .qmd creates each of the figures in the manuscript and supplement. Notable additions include: 1. a new set of maps to see the geographic distribution of water level change for phytoplankton and cyanobacteria (Fig. S4). 2. a chla sub analysis for phytoplankton responses to water level change. 3. code for new supplemental tables. 
+
 **systematic_review.qmd** - an overview quarto document that guides the user through each of the QAQC steps and runs each of the QAQC and data analysis functions. This .qmd also creates each of the figures in the manuscript and supplement.
 
 **1_qaqc_data_sysreview.R** - this function QAQCs all of the data in the sys_review_extracted_data.csv file. The primary functions of this script are to exclude any sites that were erroneously extracted, to de-duplicate any sites/data that were included in this review in multiple studies, and to fix assorted typos and mistakes in the raw extracted data. This script is located in the Scripts folder.
@@ -20,8 +22,13 @@ There are six files associated with this code and data supplement.
 
 **CovidenceExtractionTemplate_Waterleveldeclinesincreasephytoplankton.pdf** - Extraction template used in Covidence for data extraction from the studies included in this review. Studies that contained multiple waterbodies were extracted using the same questions and prompts in google sheets.
 
+**additional_sysreview_2ndextraction.csv** - Second round of extraction data from Covidence that was performed as part of the review process. In this round of review, studies that contained multiple waterbodies were addressed separately within the extraction template as necessary and are not separated by lake/reservoir. 
+
+**Covidence_extractiontemplate_2ndextraction.pdf‎** - Second round extraction template used in Covidence for data extraction. In this round of review, studies that contained multiple waterbodies were addressed separately within the extraction template as necessary and are not separated by lake/reservoir. 
+
+
 ## User instructions:
 
-To QAQC the data and to create all of the figures associated with this manuscript, users can open and run the code in systematic_review.qmd. To understand exactly the steps in each of the three functions, please see the script associated with each function (scripts 1-3).
+To QAQC the data and to create all of the figures associated with this manuscript, users can open and run the code in systematic_review_addition.qmd. The .qmd "systematic_review.qmd" is the original version of this file, which has been updated to include additional analyses in response to reviewers. To understand exactly the steps in each of the three functions, please see the script associated with each function (scripts 1-3).
 
-Running the .qmd will create two new folders, one for manuscript figures and one for supplemental figures.
+Running either .qmd will create two new folders, one for manuscript figures and one for supplemental figures.
