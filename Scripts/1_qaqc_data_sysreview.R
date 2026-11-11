@@ -19,7 +19,8 @@ qaqc_data_sysreview <- function(data_path){
   # Li 2024 flow speeds are too fast, is a river
   
   data_excl <- init_data |> 
-    filter(!name_yr %in% c("Beaver 2013","Jia 2022","Cao 2016","Wang 2022","Kisand 2004", "Hart 2004", "Nõges 2010", "Tuvikene 2011", "Christensen 2015", "Braga 2015", "Braga 2020", "Lacerda 2018", "Abirhire 2019", "Sakharova 2018", "Noges 1999", "Li 2024", "Tammeorg 2013", "Pham 2022", "Pham")) |>
+    filter(!name_yr %in% c("Beaver 2013","Jia 2022","Cao 2016","Wang 2022","Kisand 2004", "Hart 2004", "Nõges 2010", "Tuvikene 2011", "Christensen 2015", "Braga 2015", "Braga 2020", "Lacerda 2018", "Abirhire 2019", "Sakharova 2018", "Noges 1999", "Li 2024", "Tammeorg 2013", "Pham 2022")) |>
+    # filter(!name_yr %in% c("Beaver 2013","Jia 2022","Cao 2016","Wang 2022","Kisand 2004", "Hart 2004", "Nõges 2010", "Tuvikene 2011", "Christensen 2015", "Braga 2015", "Braga 2020", "Lacerda 2018", "Abirhire 2019", "Sakharova 2018", "Noges 1999", "Li 2024", "Tammeorg 2013", "Pham 2022", "Pham")) |>
     filter(!res_name == "Serra Serrada Reservoir") |> 
     filter(!res_name == "Bera Lake") |> 
     filter(!title %in% c("Steady-state assemblages in a Mediterranean hypertrophic reservoir. The role of Microcystis ecomorphological variability in maintaining an apparent equilibrium")) |>
