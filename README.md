@@ -4,7 +4,7 @@ Code and data supplements for a manuscript by Hoffman et al. on "Declining water
 
 ## Files:
 
-There are six files associated with this code and data supplement.
+There are ten files associated with this code and data supplement.
 
 **systematic_review_additions.qmd** - an overview quarto document that guides the user through each of the QAQC steps and runs each of the QAQC and data analysis functions. This .qmd has been updated from "systematic_review.qmd" in response to the review process. This .qmd creates each of the figures in the manuscript and supplement. Notable additions include: 1. a new set of maps to see the geographic distribution of water level change for phytoplankton and cyanobacteria (Fig. S4). 2. a chla sub analysis for phytoplankton responses to water level change. 3. code for new supplemental tables. 
 
